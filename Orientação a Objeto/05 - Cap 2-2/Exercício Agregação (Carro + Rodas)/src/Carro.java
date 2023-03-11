@@ -123,6 +123,5 @@ public class Carro {
     }
     
     System.out.print("\n");
-    sc.close();
   }
 }
