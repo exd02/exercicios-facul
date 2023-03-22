@@ -1,0 +1,1 @@
+Agora que já temos a classe **Filme** 🎥 **** pronta para usar, faça um **Cadastro de filmes**, onde será possível adicionar um filme, remover um filme e pesquisar um filme pelo seu titulo e diretor
