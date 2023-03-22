@@ -1,0 +1,1 @@
+Agora que já temos a classe Música 🎵 pronta para usar, faça um Cadastro de Músicas, onde será possível adicionar uma música, remover uma música e pesquisar uma música pelo seu titulo e artista
