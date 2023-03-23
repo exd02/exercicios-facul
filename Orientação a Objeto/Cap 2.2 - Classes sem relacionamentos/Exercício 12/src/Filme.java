@@ -70,25 +70,6 @@ public class Filme {
         this.preco = sc.nextDouble();
     }
 
-    /*
-     * Printa um menu de opções (inserção, remoção ou pesquisa) para o usuário e retorna a opção escolhida.
-     * @return  1 (inserir), 2 (remover), 3 (search titulo), 4 (search artista)
-     */
-    public static int optionsMenu() {
-        Scanner sc = new Scanner(System.in);
-
-        System.out.println("-------- Menu de Opções -------");
-        System.out.println("1. Inserir");
-        System.out.println("2. Remover");
-        System.out.println("3. Pesquisar por titulo");
-        System.out.println("4. Pesquisar por artista");
-        System.out.println("0. Sair");
-        System.out.println("-------------------------------");
-
-        System.out.print("- Insira a opção desejada: ");
-        return sc.nextInt();
-    }
-    
     public void print() {
         System.out.println("-------- Dados do Filme -------");
         System.out.println("- Titulo: " + this.titulo);
