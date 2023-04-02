@@ -1,3 +1,4 @@
+package classes;
 import java.util.Scanner;
 
 public class Roda {
@@ -79,7 +80,7 @@ public class Roda {
 
    
   // Pede para o usuario dar entrada em todos os dados da roda (Nome, Modelo, Aro, Peso e Suporte Max.)
-  public void preencher() {
+  public void fill() {
     Scanner sc = new Scanner(System.in);
 
     System.out.print("Informe os dados da roda: \n");
@@ -117,8 +118,8 @@ public class Roda {
     print();
   }
 
-  // Retorna uma string com todos os dados da roda
-  public String dadosDaRoda() {
+  // Retorna os dados da roda em uma string em uma única linha
+  public String shortPrint() {
     return (getNome() + " " + getModelo() + " " + getAro() + " " + getPeso() + " " + getSuporteMax());
   }
 }

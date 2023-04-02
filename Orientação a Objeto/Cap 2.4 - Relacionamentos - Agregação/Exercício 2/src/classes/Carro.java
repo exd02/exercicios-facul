@@ -1,27 +1,30 @@
+package classes;
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Carro {
   private String marca;
   private String nome;
   private String cor;
   private int ano;
-  private Roda[] rodas;
+  private List<Roda> listRodas;
 
   public Carro() {
     this.marca = null;
     this.nome = null;
     this.cor = null;
     this.ano = 0;
-    this.rodas = new Roda[4];
+    listRodas = new ArrayList<Roda>();
   }
   
-  public Carro (String marca, String nome, String cor, int ano, Roda rodas) {
+  public Carro (String marca, String nome, String cor, int ano, List<Roda> listRodas) {
     this.marca = marca;
     this.nome = nome;
     this.cor = cor;
     this.ano = ano;
-    for (int i=0; i<=3; i++) {
-     this.rodas[i].copiar(rodas);
+    for (int i=0; i<listRodas.size(); i++) {
+      this.listRodas.get(i).copiar(listRodas.get(i));
     }
   }
 
@@ -31,8 +34,8 @@ public class Carro {
     this.nome = copiarCarro.nome;
     this.cor = copiarCarro.cor;
     this.ano = copiarCarro.ano;
-    for (int i=0; i<=3; i++) {
-      this.rodas[i].copiar(copiarCarro.getRodas()[i]);
+    for (int i=0; i<=copiarCarro.getListRoda().size(); i++) {
+      this.listRodas.add(copiarCarro.getListRoda().get(i));
     }
   }
 
@@ -41,8 +44,8 @@ public class Carro {
     this.nome = copiarCarro.nome;
     this.cor = copiarCarro.cor;
     this.ano = copiarCarro.ano;
-    for (int i=0; i<=3; i++) {
-      this.rodas[i].copiar(copiarCarro.getRodas()[i]);
+    for (int i=0; i<this.listRodas.size(); i++) {
+      this.listRodas.get(i).copiar(copiarCarro.getListRoda().get(i));
     }
   }
 
@@ -59,8 +62,8 @@ public class Carro {
   public int getAno() {
     return this.ano;
   }
-  public Roda[] getRodas() {
-    return this.rodas;
+  public List<Roda> getListRoda() {
+    return this.listRodas;
   }
 
   //Setters
@@ -76,30 +79,32 @@ public class Carro {
   public void setAno (int ano) {
     this.ano = ano;
   }
-  // Setar todas as rodas usando um array
-  public void setRodas (Roda rodas[]) {
-    this.rodas = rodas;
-  }
-  // Setar uma única roda usando o index
-  public void setRoda (int i, Roda roda) {
-    this.rodas[i] = roda;
-  }
-  
-
-  // Printa os dados do carro
-  public void print() {
-    System.out.print("Dados do carro: \n");
-    System.out.println("- Marca: " + getMarca());
-    System.out.println("- Nome: " + getNome());
-    System.out.println("- Cor: " + getCor());
-    System.out.println("- Ano: " + getAno());
-    for (int i=0; i<=3; i++) {
-      System.out.println("- Roda[" + i + "]: " + getRodas()[i].dadosDaRoda());
+  public void setListRoda (List<Roda> listRoda) {
+    for (int i=0; i<listRoda.size(); i++)
+    {
+      this.listRodas.get(i).copiar(listRoda.get(i));;
     }
   }
 
+  public void imprimir() { print(); }
+  public void print() {
+    System.out.print("Dados do carro: \n");
+    System.out.println("- Marca: " + marca);
+    System.out.println("- Nome: " + nome);
+    System.out.println("- Cor: " + cor);
+    System.out.println("- Ano: " + ano);
+    for (int i=0; i<listRodas.size(); i++) {
+      System.out.println("- Roda[" + i + "]: " + listRodas.get(i).shortPrint());
+    }
+  }
+
+  public String shortPrint()
+  {
+    return (nome + ", " + marca + ", " + cor + ", " + ano + " (4x " + listRodas.get(0).shortPrint() + ")");
+  }
+
   // Pede para o usuario dar entrada em todos os dados do carro
-  public void preencher() {
+  public void fill() {
     Scanner sc = new Scanner(System.in);
 
     System.out.print("Informe os dados do carro: \n");
@@ -115,11 +120,12 @@ public class Carro {
 
     System.out.print("- Ano: ");
     setAno(sc.nextInt());
-
-    Roda r = new Roda();
+    
+    
     for (int i=0; i<=3; i++) {
-      r.preencher();
-      setRoda(i, r);
+      Roda r = new Roda();
+      r.fill();
+      listRodas.add(r);
     }
     
     System.out.print("\n");

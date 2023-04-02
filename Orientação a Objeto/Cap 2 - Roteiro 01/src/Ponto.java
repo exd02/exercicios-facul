@@ -48,12 +48,6 @@ public class Ponto {
 
     System.out.print("- Y: ");
     setY(sc.nextDouble());
-
-    /*
-    *  sc.close(); 
-    *  Ao dar "sc.close()" obtenho o erro "java.util.NoSuchElementException"
-    *  Isso acontece porque eu tentei chamar a função preencher mais de uma vez, sendo que o scanner já deu close
-    */
   }
 
   // Printar os pontos no formato (X,Y)
