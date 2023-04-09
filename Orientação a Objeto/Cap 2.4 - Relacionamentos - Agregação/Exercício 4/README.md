@@ -1,18 +1,15 @@
-## Getting Started
+### Exercício 04
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+Dentro de uma sistema comercial, temos que uma pessoa física possui varias contas a pagar. Crie cada uma das classes com, pelo menos os respectivos métodos:  `preencher()` , `imprimir()` e `copiar()` 
 
-## Folder Structure
+Use o relacionamento de agregação para o relacionamento entre Pessoa e Contas**.** Lembre-se, sempre que necessário usar a abordagem 03 (delegação) que falamos acima.
 
-The workspace contains two folders by default, where:
+![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/42f52838-932f-4ce8-b7d5-cd37b6271bcc/Untitled.png)
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+Finalmente, crie na função main uma lista com 5 pessoas e cada um com três contas para pagar. Depois crie uma função que verifique qual a pessoa que tem o maio saldo devedor e qual o total devido por todas as pessoas.
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
-
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
-
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+- Solução git
+    
+    [IFCoder / Java / OO / proj_PessoaFisica_Conta_ex4 · GitLab](https://gitlab.com/ifcoder/java/oo/proj_pessoafisica_conta_ex4)
+    
+    [Ex04 - funcionamento](https://www.notion.so/Ex04-funcionamento-53a911995c6447dc82ea51497189aedd)
