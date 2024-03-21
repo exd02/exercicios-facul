@@ -91,7 +91,7 @@ bool Grafo::EhCompleto() {
 
 	for (int m = 0; m < tamanho; m++) {
 		for (int n = ehSimples ? 1 + m : 0; n < tamanho; n++) {
-			if (!grafo[m][n])
+			if (m != n && !grafo[m][n])
 				return false;
 		}
 	}
