@@ -90,8 +90,7 @@
 
 ![image](https://github.com/exd02/exercicios-facul/assets/62575526/bdd52af5-1af1-4eb2-9612-d58dd17c18a2)
 
-<h3>Saída(Versão teste):</h3>
+<h3>Saída:</h3>
 
-![image](https://github.com/exd02/exercicios-facul/assets/62575526/6ce43bed-d5ea-42fa-979d-a094f1dee7cb)
-
+![image](https://github.com/exd02/exercicios-facul/assets/62575526/e888566f-f5c4-4481-9ead-6137fa25865a)
 
