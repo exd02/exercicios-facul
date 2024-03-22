@@ -1,8 +1,10 @@
 #include "Grafo.h"
 
 Grafo::Grafo(const int tamanho) {
-	this->tamanho = tamanho;
+	this->numVertices = tamanho;
 	this->ehSimples = true;
+	this->ehDirigido = false;
+	this->ehPseudografo = false;
 
 	std::vector<int> linha(tamanho);
 	for (int i = 0; i < tamanho; i++)
@@ -13,8 +15,8 @@ Grafo::Grafo(const int tamanho) {
 
 std::string Grafo::ToString() {
 	std::string s;
-	for (int m = 0; m < tamanho; m++) {
-		for (int n = 0; n < tamanho; n++) {
+	for (int m = 0; m < numVertices; m++) {
+		for (int n = 0; n < numVertices; n++) {
 			s += std::to_string(grafo[m][n]) + " ";
 		}
 		s += '\n';
@@ -23,16 +25,22 @@ std::string Grafo::ToString() {
 }
 
 void Grafo::AddAresta(const int from, const int to, bool isDirected) {
-	grafo[from][to] = 1;
+	grafo[from][to]++;
 	if (!isDirected)
-		grafo[to][from] = 1;
+		grafo[to][from]++;
 
-	if (to == from || isDirected)
+	if (isDirected && grafo[from][to] != grafo[to][from])
+		ehDirigido = false;
+
+	if (to == from || ehDirigido)
 		ehSimples = false;
+
+	if (!ehDirigido && grafo[from][to] > 1)
+		ehPseudografo = true;
 }
 
 bool Grafo::TemLaco() {
-	for (int i = 0; i < tamanho; i++) {
+	for (int i = 0; i < numVertices; i++) {
 		// a diagonal principal não pode ser 1 (grafo simples não tem laço)
 		if (grafo[i][i]) {
 			return true;
@@ -50,8 +58,8 @@ bool Grafo::TemArestaDirigida() {
 	// M=2 ->   0    0    -    1
 	// M=3 ->   0    0    1    -
 	// exemplo: [0][1] == [1][0]?
-	for (int m = 0; m < tamanho; m++) {
-		for (int n = 1+m; n < tamanho; n++) {
+	for (int m = 0; m < numVertices; m++) {
+		for (int n = 1+m; n < numVertices; n++) {
 			if (grafo[m][n] != grafo[n][m])
 				return true;
 		}
@@ -68,12 +76,12 @@ bool Grafo::EhSimples() {
 
 bool Grafo::EhConexo() {
 	
-	for (int m = 0; m < tamanho; m++) {
+	for (int m = 0; m < numVertices; m++) {
 
 		bool fazAlgumaLigacao = false;
 
 		// se o grafo for simples, basta olhar a parte de cima da diagonal principal (1+m), diminuindo a complexidade
-		for (int n = ehSimples ? 1 + m : 0; n < tamanho; n++) {
+		for (int n = ehSimples ? 1 + m : 0; n < numVertices; n++) {
 			if (grafo[m][n]) {
 				fazAlgumaLigacao = true;
 				break;
@@ -89,8 +97,8 @@ bool Grafo::EhConexo() {
 
 bool Grafo::EhCompleto() {
 
-	for (int m = 0; m < tamanho; m++) {
-		for (int n = ehSimples ? 1 + m : 0; n < tamanho; n++) {
+	for (int m = 0; m < numVertices; m++) {
+		for (int n = ehSimples ? 1 + m : 0; n < numVertices; n++) {
 			if (m != n && !grafo[m][n])
 				return false;
 		}
@@ -102,7 +110,7 @@ bool Grafo::EhCompleto() {
 int Grafo::GrauVertice(const int v) {
 	int grau = 0;
 
-	for (int n = ehSimples ? 1 + v : 0; n < tamanho; n++) {
+	for (int n = ehSimples ? 1 + v : 0; n < numVertices; n++) {
 		if (grafo[v][n])
 			grau++;
 	}
@@ -111,14 +119,36 @@ int Grafo::GrauVertice(const int v) {
 }
 
 std::vector<int> Grafo::GrauVertices() {
-	std::vector<int> grauVertices(tamanho);
+	std::vector<int> grauVertices(numVertices);
 
-	for (int m = 0; m < tamanho; m++) {
-		for (int n = ehSimples ? 1 + m : 0; n < tamanho; n++) {
+	for (int m = 0; m < numVertices; m++) {
+		for (int n = 0; n < numVertices; n++) {
 			if (grafo[m][n])
 				grauVertices[m]++;
 		}
 	}
 
 	return grauVertices;
+}
+
+bool Grafo::EhPseudografo() {
+	for (int m = 0; m < numVertices; m++) {
+		for (int n = ehSimples ? m : 0; n < numVertices; n++) {
+			if (grafo[m][n] > 1)
+				return true;
+		}
+	}
+	return false;
+}
+
+bool Grafo::EhRegular() {
+	std::vector<int> grauVertices = GrauVertices();
+
+	for (int i = 0; i < numVertices-1; i++)
+	{
+		if (grauVertices[i] != grauVertices[i + 1])
+			return false;
+	}
+
+	return true;
 }

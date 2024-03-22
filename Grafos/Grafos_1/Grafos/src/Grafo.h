@@ -7,15 +7,59 @@
 class Grafo
 {
 private:
-	int tamanho;
+	int numVertices;
 	std::vector<std::vector<int>> grafo;
 
 	// é melhor criar uma variável para saber se é simples ou não (analisando ao inserir uma aresta)
 	// do que ficar rodando a função EhSimples, que tem complexidade quadrática
 	bool ehSimples;
+	bool ehDirigido;
+	bool ehPseudografo;
+	bool ehConexo;
 
 public:
 	Grafo(const int tamanho);
+
+    inline int getNumVertices() const {
+        return numVertices;
+    }
+
+    inline bool getEhSimples() const {
+        return ehSimples;
+    }
+
+    inline bool getEhDirigido() const {
+        return ehDirigido;
+    }
+
+    inline bool getEhPseudografo() const {
+        return ehPseudografo;
+    }
+
+    inline bool getEhConexo() const {
+        return ehConexo;
+    }
+
+    inline void setTamanho(int tamanho) {
+        this->numVertices = tamanho;
+    }
+
+    inline void setSimples(bool ehSimples) {
+        this->ehSimples = ehSimples;
+    }
+
+    inline void setDirigido(bool ehDirigido) {
+        this->ehDirigido = ehDirigido;
+    }
+
+    inline void setPseudografo(bool ehPseudografo) {
+        this->ehPseudografo = ehPseudografo;
+    }
+
+    inline void setConexo(bool ehConexo) {
+        this->ehConexo = ehConexo;
+    }
+
 	std::string ToString();
 	void AddAresta(const int from, const int to, bool isDirected = false);
 	
@@ -23,8 +67,9 @@ public:
 	bool EhSimples();
 	bool EhConexo();
 	bool EhCompleto();
-	// bool EhPseudografo();
-	// bool EhMultigrafo();
+	// pseudografo e multigrafo são a mesma coisa
+	bool EhPseudografo();
+	bool EhRegular();
 
 	bool TemLaco();
 	bool TemArestaDirigida();

@@ -17,23 +17,21 @@ int main()
     std::cout << "[+] Grafo: " << std::endl;
     std::cout << a.ToString() << std::endl;
 
-    std::cout << "[+] Informacoes do Grafo: " << std::endl;
-    std::cout << "\t[-] Simples? " << (a.EhSimples() ? "Sim" : "Nao") << std::endl;
-    std::cout << "\t\t[-] Tem Laco? " << (a.TemLaco() ? "Sim" : "Nao") << std::endl;
-    std::cout << "\t\t[-] Tem alguma Aresta Dirigida? " << (a.TemArestaDirigida() ? "Sim" : "Nao") << std::endl;
-    std::cout << "\t[-] Eh Conexo? " << (a.EhConexo() ? "Sim" : "Nao") << std::endl;
-    std::cout << "\t[-] Eh Completo? " << (a.EhCompleto() ? "Sim" : "Nao") << std::endl;
-    std::cout << "\t[-] Eh Pseudografo? " << "???" << std::endl;
-    std::cout << "\t[-] Eh Multigrafo? " << "???" << std::endl;
-    std::cout << "\t[-] Ordem? " << "???" << std::endl;
-    std::cout << "\t[-] Tamanho? " << "???" << std::endl;
-    std::cout << "\t[-] Grau dos vertices: " << std::endl;
+    std::cout << "[+] Simples? " << (a.EhSimples() ? "Sim" : "Nao") << std::endl;
+    std::cout << "\t[-] Tem Laco? " << (a.TemLaco() ? "Sim" : "Nao") << std::endl;
+    std::cout << "\t[-] Tem alguma Aresta Dirigida? " << (a.TemArestaDirigida() ? "Sim" : "Nao") << std::endl;
+    std::cout << "[+] Eh Conexo? " << (a.EhConexo() ? "Sim" : "Nao") << std::endl;
+    std::cout << "[+] Eh Completo? " << (a.EhCompleto() ? "Sim" : "Nao") << std::endl;
+    std::cout << "[+] Eh Pseudografo/Multigrafo? " << (a.EhPseudografo() ? "Sim" : "Nao") << std::endl;
+    std::cout << "[+] Ordem? " << a.getNumVertices() << std::endl;
+    std::cout << "[+] Tamanho? " << std::endl;
+    std::cout << "[+] Grau dos vertices: " << std::endl;
 
     std::vector<int> grauVertices = a.GrauVertices();
     for (int i = 0; i < n; i++)
     {
-        std::cout << "\t\t[-] V[" << i << "]: " << grauVertices[i] << std::endl;
+        std::cout << "\t[-] V[" << i << "]: " << grauVertices[i] << std::endl;
     }
 
-    std::cout << "\t[-] Grafo regular? " << "???" << std::endl;
+    std::cout << "[+] Grafo regular? " << (a.EhRegular() ? "Sim" : "Nao") << std::endl;
 }
