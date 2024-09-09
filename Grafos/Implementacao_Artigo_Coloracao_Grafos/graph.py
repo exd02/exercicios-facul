@@ -83,10 +83,11 @@ for node, _ in degree_sequence:
     if available_color not in used_colors:
         used_colors.append(available_color)
 
-colors = [node_colors.get(node, "white") for node in G.nodes()]
+node_colors_list = [node_colors.get(node, "white") for node in G.nodes()]
+
 
 print("Cores usadas: ", used_colors)
 
 shells = [courses]
-nx.draw_shell(G, nlist=shells, with_labels=True, node_color=colors, edge_color='gray', font_weight='bold', node_size=2000, arrows=True)
+nx.draw_shell(G, nlist=shells, with_labels=True, node_color=node_colors_list, edge_color='gray', font_weight='bold', node_size=2000, arrows=True)
 plt.show()
