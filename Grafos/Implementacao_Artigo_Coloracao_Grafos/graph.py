@@ -57,32 +57,36 @@ G = nx.Graph()
 G.add_nodes_from(courses)
 G.add_edges_from(conflicts)
 
-
-available_colors = [ "red", "green", "blue", "orange", "cyan", "magenta" ]
+# max 7 periodos
+colors = [ "red", "green", "blue", "orange", "cyan", "magenta", "lightblue" ]
 
 degree_sequence = sorted(G.degree, key=lambda deg: deg[1], reverse=True)
+
+for d in degree_sequence:
+    print(d[0]," degree: " , d[1])
 
 used_colors = []
 node_colors = {}
 
 for node, _ in degree_sequence:
-    # buscar a cor disponivel nos vizinhos
-    neighbor_colors = {node_colors.get(neighbor) for neighbor in G.neighbors(node) if neighbor in node_colors}
+    # cores dos vizinhos
+    neighbor_colors = [node_colors.get(neighbor) for neighbor in G.neighbors(node) if neighbor in node_colors]
+
+    # pegar a primeira cor nao usadas pelos vizinhos
+    available_color = next((color for color in colors if color not in neighbor_colors), None)
+
+    if available_color is None:
+        print(f"O programa excedeu o max de cores/períodos permitidos no nó {node}.")
+        exit(1)
     
-    # atribuir a menor cor disponivel
-    for color in available_colors:
-        if color not in neighbor_colors:
-            node_colors[node] = color
-            if color not in used_colors:
-                used_colors.append(color)
-            break
+    node_colors[node] = available_color
+    if available_color not in used_colors:
+        used_colors.append(available_color)
 
+colors = [node_colors.get(node, "white") for node in G.nodes()]
 
-node_color_list = [node_colors.get(node, "white") for node in G.nodes()]
-
-print(f"Cores usadas: {used_colors}")
-print(f"Cores dos nós: {node_colors}")
+print("Cores usadas: ", used_colors)
 
 shells = [courses]
-nx.draw_shell(G, nlist=shells, with_labels=True, node_color=node_color_list, edge_color='gray', font_weight='bold', node_size=2000, arrows=True)
+nx.draw_shell(G, nlist=shells, with_labels=True, node_color=colors, edge_color='gray', font_weight='bold', node_size=2000, arrows=True)
 plt.show()
